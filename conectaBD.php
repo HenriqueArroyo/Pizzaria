@@ -19,7 +19,7 @@ try {
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
     echo "Conectado no banco de dados!!!";
-    $sql = "CREATE TABLE IF NOT EXISTS Cliente ( nome_cliente VARCHAR(100) UNIQUE, telefone_cliente VARCHAR(255), endereco_cliente VARCHAR(255), email_cliente VARCHAR(255), senha_cliente VARCHAR(255) NOT NULL ";
+    $sql = "CREATE TABLE IF NOT EXISTS cliente (nome VARCHAR(255), telefone VARCHAR(255), endereco VARCHAR(255), email VARCHAR(255) PRIMARY KEY, senha VARCHAR(255))";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
 } catch (PDOException $e) {

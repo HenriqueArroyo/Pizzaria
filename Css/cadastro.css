@@ -79,7 +79,15 @@ section button:hover{
 	transition: 1s;
 }
 
-section h1 {
+h1 {
 	font-size: 3vh;
 	padding: 20px;
+}
+
+h1{
+ margin-left: 40%;
+}
+
+form {
+	margin-left: 40%;
 }

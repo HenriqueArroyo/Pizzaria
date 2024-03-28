@@ -8,9 +8,9 @@
 </head>
 <body>
   <header>
-    <a href=""><img src="/Assets/RECEBA.png" alt="Logo"></a>
+    <a href="index.php"><img src="/Assets/RECEBA.png" alt="Logo"></a>
     <div class="link">
-      <a href=""><p>Pizzas</p></a>
+      <a href="index.php"><p>Pizzas</p></a>
       <a href=""><p>Contato</p></a>
       <a href=""><p>Sobre</p></a>
     </div>
@@ -22,14 +22,37 @@
   <section>
 
   <h1>Cadastro</h1>
-  <form method="post" action="processa_usuario.php">
-    Nome: <input type="text" name="nome"><br><br>
-    Telefone: <input type="text" name="telefone"><br><br>
-    Endereço: <input type="text" name="endereco"><br><br>
-    Email: <input type="text" name="email"><br><br>
-    Senha: <input type="password" name="senha"><br><br>
-    <input type="submit" name="submit" value="Cadastrar">
-</form>
+  <div class="container">
+        <form action="processa_usuario.php" method="post">
+            <div class="col-4">
+                <label for="nome">Nome Completo</label><br>
+                <input type="text" name="nome" id="nome" class="form-control">
+            </div>
+
+            <div class="col-4">
+                <label for="telefone">Telefone para Contato</label><br>
+                <input type="tel" name="telefone" id="telefone" class="form-control">
+            </div>
+            <div class="col-4">
+                <label for="endereco">Endereco</label><br>
+
+                <input type="text" name="endereco" id="endereco" class="form-control">
+
+            </div>
+        
+            <div class="col-4">
+                <label for="email">E-mail</label><br>
+                <input type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="col-4">
+                <label for="senha">Senha</label><br>
+                <input type="password" name="senha" id="senha" class="form-control">
+            </div><br>
+
+            <button type="submit" name="enviarDados" class="btn btn-primary">Cadastrar</button>
+
+            <a href="index.php" class="btn btn-danger">Cancelar</a>
+        </form>
 
   </section>
 

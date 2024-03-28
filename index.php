@@ -8,14 +8,14 @@
 </head>
 <body>
   <header>
-    <a href=""><img src="/Assets/RECEBA.png" alt="Logo"></a>
+    <a href="index.php"><img src="/Assets/RECEBA.png" alt="Logo"></a>
     <div class="link">
-      <a href=""><p>Pizzas</p></a>
+      <a href="index.php"><p>Pizzas</p></a>
       <a href=""><p>Contato</p></a>
       <a href=""><p>Sobre</p></a>
     </div>
     <div class="user">
-      <a href=""><input type="button" value="Cadastrar"></a>
+      <a href="cadastro.php"><input type="button" value="Cadastrar"></a>
       <a href=""><input type="button" value="Entrar"></a>
     </div>
   </header>

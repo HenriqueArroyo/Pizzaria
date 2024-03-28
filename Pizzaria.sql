@@ -23,7 +23,8 @@ cargo_funcionario VARCHAR(255),
 email_funcionario VARCHAR(255),
 telefone_funcionario VARCHAR(14),
 cpf_funcionario VARCHAR(14) UNIQUE,
-data_contratacao DATE NOT NULL
+data_contratacao DATE NOT NULL,
+senha VARCHAR(255) NOT NULL
 );
 
 

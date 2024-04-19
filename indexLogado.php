@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pizzaria Receba</title>
-  <link rel="stylesheet" href="/Css/style.css">
+  <link rel="stylesheet" href="/Css/styleLogado.css">
 </head>
 <body>
   <header>
@@ -15,8 +15,8 @@
       <a href=""><p>Sobre</p></a>
     </div>
     <div class="user">
-      <a href="cadastro.php"><input type="button" value="Cadastrar"></a>
-      <a href="login.php"><input type="button" value="Entrar"></a>
+      <a href="pedido.php"><input id="pedido" type="button" value="Realizar Pedido"></a>
+      <a href="index.php"><input type="button" value="Sair"></a>
     </div>
   </header>
   <section>

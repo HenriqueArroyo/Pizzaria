@@ -1,36 +1,52 @@
 <?php
-require_once 'conectaBD.php';
-// Definir o BD (e a tabela)
-// Conectar ao BD (com o PHP)
+// Configurações do banco de dados
+$endereco = 'localhost';
+$banco = 'postgres';
+$usuario = 'postgres';
+$senha = 'postgres';
 
-if (!empty($_POST)) {
-    // Está chegando dados por POST e então posso tentar inserir no banco
-    // Obter as informações do formulário ($_POST)
-    try {
-        // Preparar as informações
-        // Montar a SQL (pgsql)
-        $sql = "INSERT INTO funcionario (nome, telefone, endereco, email, senha) VALUES (:nome, :telefone, :endereco, :email, :senha)";
-        // Preparar a SQL (pdo)
+try {
+    // Conexão com o banco de dados
+    $pdo = new PDO(
+        "pgsql:host=$endereco;port=5432;dbname=$banco",
+        $usuario,
+        $senha,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+
+    // Verificar se os dados foram enviados via POST
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Dados do formulário
+        $nome = $_POST['nome'];
+        $telefone = $_POST['telefone'];
+        $cpf = $_POST['cpf'];
+        $cargo = $_POST['cargo'];
+        $dataAdmissao = $_POST['dataAdmissao'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+        // Preparar a SQL para inserir o funcionário na tabela
+        $sql = "INSERT INTO funcionarios (nome, telefone, cpf, cargo, data_admissao, email, senha) VALUES (:nome, :telefone, :cpf, :cargo, :dataAdmissao, :email, :senha)";
         $stmt = $pdo->prepare($sql);
-        // Definir/organizar os dados p/ SQL
-        $dados = array(
-            ':nome' => $_POST['nome'],
-            ':telefone' => $_POST['telefone'],
-            ':endereco' => $_POST['endereco'],
-            ':email' => $_POST['email'],
-            ':senha' => md5($_POST['senha']) //md5 é um padrão de criptografia
-        );
-        // Tentar Executar a SQL (INSERT)
-        // Realizar a inserção das informações no BD (com o PHP)
-        if ($stmt->execute($dados)) {
-            header("Location: index.php?msgSucesso=Cadastro realizado com sucesso!");
-        }
-    } catch (PDOException $e) {
-        //die($e->getMessage());
-        header("Location: index.php?msgErro=Falha ao cadastrar...");
+
+        // Bind dos parâmetros
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':telefone', $telefone);
+        $stmt->bindParam(':cpf', $cpf);
+        $stmt->bindParam(':cargo', $cargo);
+        $stmt->bindParam(':dataAdmissao', $dataAdmissao);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':senha', $senha);
+
+        // Executar a SQL
+        $stmt->execute();
+
+        // Redirecionar de volta para a página de cadastro com uma mensagem de sucesso
+        header("Location: cadastroFuncionario.php?msg=Cadastro realizado com sucesso!");
+        exit;
     }
-} else {
-    header("Location: index.php?msgErro=Erro de acesso.");
+} catch (PDOException $e) {
+    echo "Falha ao conectar ao banco de dados. <br/>";
+    die($e->getMessage());
 }
-die();
-// Redirecionar para a página inicial (login) c/ mensagem erro/sucesso
+?>

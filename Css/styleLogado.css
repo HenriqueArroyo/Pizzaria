@@ -49,6 +49,10 @@ header img:hover {
 	top: 50%;
 }
 
+#pedido{
+    width: 12vh;
+}
+
 .user input{
 	background-color: white;
 	border: 1px solid black;

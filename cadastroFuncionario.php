@@ -23,7 +23,7 @@
 
   <h1>Cadastro</h1>
   <div class="container">
-        <form action="processa_usuario.php" method="post">
+        <form action="processa_funcionario.php" method="post">
             <div class="col-4">
                 <label for="nome">Nome Completo</label><br>
                 <input type="text" name="nome" id="nome" class="form-control">

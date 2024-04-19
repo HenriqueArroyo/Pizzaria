@@ -16,7 +16,7 @@
     </div>
     <div class="user">
       <a href=""><input type="button" value="Cadastrar"></a>
-      <a href=""><input type="button" value="Entrar"></a>
+      <a href="login.php"><input type="button" value="Entrar"></a>
     </div>
   </header>
   <section>
@@ -52,10 +52,14 @@
             <button type="submit" name="enviarDados" class="btn btn-primary">Cadastrar</button>
 
             <a href="index.php" class="btn btn-danger">Cancelar</a>
+            <br>
+            <a href="cadastroFuncionario.php">Funcionário</a>
         </form>
 
   </section>
+<footer>
 
+</footer>
 
 </body>
 </html>

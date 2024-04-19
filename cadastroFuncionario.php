@@ -1,73 +1,52 @@
+<?php
+session_start();
+
+require_once 'conectaBD.php';
+
+if(isset($_SESSION['funcionario_id'])) {
+    header("Location: painelFuncionario.php");
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $sql = "SELECT * FROM funcionarios WHERE email = :email AND senha = :senha";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['email' => $email, 'senha' => md5($senha)]);
+
+    $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($funcionario) {
+        $_SESSION['funcionario_id'] = $funcionario['id'];
+        $_SESSION['funcionario_nome'] = $funcionario['nome'];
+        header("Location: painelFuncionario.php");
+        exit;
+    } else {
+        $erro = "Credenciais inválidas. Por favor, tente novamente.";
+    }
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizzaria Receba</title>
-  <link rel="stylesheet" href="/Css/cadastro.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Funcionário</title>
 </head>
 <body>
-  <header>
-    <a href="index.php"><img src="/Assets/RECEBA.png" alt="Logo"></a>
-    <div class="link">
-      <a href="index.php"><p>Pizzas</p></a>
-      <a href=""><p>Contato</p></a>
-      <a href=""><p>Sobre</p></a>
-    </div>
-    <div class="user">
-      <a href=""><input type="button" value="Cadastrar"></a>
-      <a href=""><input type="button" value="Entrar"></a>
-    </div>
-  </header>
-  <section>
-
-  <h1>Cadastro</h1>
-  <div class="container">
-        <form action="processa_funcionario.php" method="post">
-            <div class="col-4">
-                <label for="nome">Nome Completo</label><br>
-                <input type="text" name="nome" id="nome" class="form-control">
-            </div>
-
-            <div class="col-4">
-                <label for="telefone">Telefone</label><br>
-                <input type="tel" name="telefone" id="telefone" class="form-control">
-            </div>
-            <div class="col-4">
-                <label for="cpf">CPF</label><br>
-
-                <input type="text" name="cpf" id="cpf" class="form-control">
-
-            </div>
-            <div class="col-4">
-                <label for="cargo">Cargo</label><br>
-
-                <input type="text" name="cargo" id="cargo" class="form-control">
-
-            </div>
-
-            <div class="col-4">
-                <label for="dataAdmissao">Data de Admissão</label><br>
-
-                <input type="date" name="dataAdmissao" id="dataAdmissao" class="form-control">
-
-            </div>
-            <div class="col-4">
-                <label for="email">E-mail</label><br>
-                <input type="email" name="email" id="email" class="form-control">
-            </div>
-            <div class="col-4">
-                <label for="senha">Senha</label><br>
-                <input type="password" name="senha" id="senha" class="form-control">
-            </div><br>
-
-            <button type="submit" name="enviarDados" class="btn btn-primary">Cadastrar</button>
-
-            <a href="index.php" class="btn btn-danger">Cancelar</a>
-        </form>
-
-  </section>
-
-
+    <h2>Login Funcionário</h2>
+    <?php if(isset($erro)) { ?>
+        <p><?php echo $erro; ?></p>
+    <?php } ?>
+    <form method="post" action="">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br>
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha" required><br><br>
+        <input type="submit" value="Login">
+    </form>
 </body>
 </html>
